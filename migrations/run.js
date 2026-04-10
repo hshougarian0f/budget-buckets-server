@@ -61,7 +61,11 @@ async function migrate(direction = 'up') {
 }
 
 const direction = process.argv[2] || 'up';
-migrate(direction).catch((err) => {
-  console.error('Migration failed:', err);
-  process.exit(1);
-});
+migrate(direction)
+  .then(() => {
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.error('Migration failed:', err);
+    process.exit(1);
+  });
