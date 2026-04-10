@@ -56,13 +56,13 @@ async function migrate(direction = 'up') {
     }
   } finally {
     client.release();
-    await pool.end();
   }
 }
 
 const direction = process.argv[2] || 'up';
 migrate(direction)
   .then(() => {
+    console.log('Exiting migration script...');
     process.exit(0);
   })
   .catch((err) => {
