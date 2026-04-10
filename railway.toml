@@ -3,6 +3,6 @@ builder = "DOCKERFILE"
 dockerfilePath = "./Dockerfile"
 
 [deploy]
-startCommand = "node migrations/run.js && echo 'MIGRATIONS DONE' && echo 'STARTING SERVER' && node src/index.js"
+startCommand = "node migrations/run.js && node -e \"const http = require('http'); const s = http.createServer((req,res) => { res.writeHead(200); res.end('OK'); }); s.listen(process.env.PORT || 3001, () => console.log('LISTENING ON PORT ' + (process.env.PORT || 3001)));\""
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 5
