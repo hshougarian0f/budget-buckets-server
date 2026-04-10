@@ -57,7 +57,7 @@ router.post(
   '/',
   [
     body('name').trim().isLength({ min: 1, max: 100 }).withMessage('Name is required (max 100 chars)'),
-    body('budget').isFloat({ min: 0.01 }).withMessage('Budget must be a positive number'),
+    body('budget').isFloat({ min: 0.01, max: 9999999.99 }).withMessage('Budget must be between $0.01 and $9,999,999.99'),
     body('icon').optional().trim().isLength({ max: 50 }),
     body('color').optional().matches(/^#[0-9A-Fa-f]{6}$/).withMessage('Color must be a hex color'),
   ],

@@ -58,8 +58,8 @@ router.post('/exchange-token', async (req, res, next) => {
   try {
     const { public_token, institution } = req.body;
 
-    if (!public_token) {
-      return res.status(400).json({ error: 'public_token is required' });
+    if (!public_token || typeof public_token !== 'string' || public_token.length > 500) {
+      return res.status(400).json({ error: 'Valid public_token is required' });
     }
 
     const userResult = await db.query(

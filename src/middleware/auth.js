@@ -16,7 +16,13 @@ async function authenticate(req, res, next) {
     });
   }
 
-  const token = authHeader.split('Bearer ')[1];
+  const token = authHeader.slice(7); // Remove 'Bearer '
+  if (!token || token.length < 10) {
+    return res.status(401).json({
+      error: 'unauthorized',
+      message: 'Invalid authorization token format',
+    });
+  }
 
   try {
     const decodedToken = await admin.auth().verifyIdToken(token);
