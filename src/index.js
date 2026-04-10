@@ -1,4 +1,11 @@
+// CRITICAL: Write to stderr immediately (unbuffered) so we can see startup
+process.stderr.write('[STARTUP] Initializing server...\n');
+
 require('dotenv').config();
+
+process.stderr.write('[STARTUP] dotenv loaded\n');
+process.stderr.write('[STARTUP] NODE_ENV: ' + (process.env.NODE_ENV || 'development') + '\n');
+process.stderr.write('[STARTUP] PORT: ' + (process.env.PORT || 3001) + '\n');
 
 console.log('[STARTUP] Starting Budget Buckets server...');
 console.log('[STARTUP] NODE_ENV:', process.env.NODE_ENV);

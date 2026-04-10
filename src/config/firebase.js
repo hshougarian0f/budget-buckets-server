@@ -1,6 +1,14 @@
+// CRITICAL: Write to stderr immediately (unbuffered)
+process.stderr.write('[FIREBASE] Module loading...\n');
+
 const admin = require('firebase-admin');
 const fs = require('fs');
 const path = require('path');
+
+process.stderr.write('[FIREBASE] Initializing Firebase...\n');
+process.stderr.write('[FIREBASE] FIREBASE_PROJECT_ID: ' + (process.env.FIREBASE_PROJECT_ID ? 'SET' : 'NOT SET') + '\n');
+process.stderr.write('[FIREBASE] FIREBASE_CLIENT_EMAIL: ' + (process.env.FIREBASE_CLIENT_EMAIL ? 'SET' : 'NOT SET') + '\n');
+process.stderr.write('[FIREBASE] FIREBASE_PRIVATE_KEY: ' + (process.env.FIREBASE_PRIVATE_KEY ? 'SET (length: ' + process.env.FIREBASE_PRIVATE_KEY.length + ')' : 'NOT SET') + '\n');
 
 console.log('[FIREBASE] Initializing Firebase...');
 console.log('[FIREBASE] FIREBASE_PROJECT_ID:', process.env.FIREBASE_PROJECT_ID ? 'SET' : 'NOT SET');
